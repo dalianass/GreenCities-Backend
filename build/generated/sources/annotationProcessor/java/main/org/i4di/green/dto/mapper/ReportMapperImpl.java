@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-06-12T16:43:17+0200",
+    date = "2023-06-16T14:37:38+0200",
     comments = "version: 1.3.1.Final, compiler: javac, environment: Java 1.8.0_202 (Oracle Corporation)"
 )
 @Component
@@ -28,22 +28,23 @@ public class ReportMapperImpl implements ReportMapper {
 
         ReportDTO reportDTO = new ReportDTO();
 
-        if ( report.getCreatedAt() != null ) {
-            reportDTO.setCreatedAt( DateTimeFormat.forPattern( "yyyy-MM-dd'T'HH:mm:ssZZ" ).print( report.getCreatedAt() ).trim() );
-        }
         reportDTO.setAddress( report.getAddress() );
-        reportDTO.setDeleted( report.getDeleted() );
-        reportDTO.setCreatedBy( userMapper.userToUserDTO( report.getCreatedBy() ) );
+        reportDTO.setFinishedBy( userMapper.userToUserDTO( report.getFinishedBy() ) );
         reportDTO.setLatitude( report.getLatitude() );
         reportDTO.setPhoto( report.getPhoto() );
         reportDTO.setDescription( report.getDescription() );
-        reportDTO.setId( report.getId() );
         reportDTO.setTitle( report.getTitle() );
+        reportDTO.setIsFinished( report.getIsFinished() );
+        if ( report.getCreatedAt() != null ) {
+            reportDTO.setCreatedAt( DateTimeFormat.forPattern( "yyyy-MM-dd'T'HH:mm:ssZZ" ).print( report.getCreatedAt() ).trim() );
+        }
+        reportDTO.setDeleted( report.getDeleted() );
+        reportDTO.setCreatedBy( userMapper.userToUserDTO( report.getCreatedBy() ) );
+        reportDTO.setId( report.getId() );
         if ( report.getUpdatedAt() != null ) {
             reportDTO.setUpdatedAt( DateTimeFormat.forPattern( "yyyy-MM-dd'T'HH:mm:ssZZ" ).print( report.getUpdatedAt() ).trim() );
         }
         reportDTO.setLongitude( report.getLongitude() );
-        reportDTO.setFinishedBy( userMapper.userToUserDTO( report.getFinishedBy() ) );
 
         return reportDTO;
     }
@@ -70,22 +71,23 @@ public class ReportMapperImpl implements ReportMapper {
 
         Report report = new Report();
 
-        if ( reportDTO.getCreatedAt() != null ) {
-            report.setCreatedAt( DateTimeFormat.forPattern( "yyyy-MM-dd'T'HH:mm:ssZZ" ).parseDateTime( reportDTO.getCreatedAt() ) );
-        }
         report.setAddress( reportDTO.getAddress() );
-        report.setDeleted( reportDTO.getDeleted() );
-        report.setCreatedBy( userMapper.userDTOToUser( reportDTO.getCreatedBy() ) );
+        report.setFinishedBy( userMapper.userDTOToUser( reportDTO.getFinishedBy() ) );
         report.setLatitude( reportDTO.getLatitude() );
         report.setPhoto( reportDTO.getPhoto() );
         report.setDescription( reportDTO.getDescription() );
-        report.setId( reportDTO.getId() );
         report.setTitle( reportDTO.getTitle() );
+        report.setIsFinished( reportDTO.getIsFinished() );
+        if ( reportDTO.getCreatedAt() != null ) {
+            report.setCreatedAt( DateTimeFormat.forPattern( "yyyy-MM-dd'T'HH:mm:ssZZ" ).parseDateTime( reportDTO.getCreatedAt() ) );
+        }
+        report.setDeleted( reportDTO.getDeleted() );
+        report.setCreatedBy( userMapper.userDTOToUser( reportDTO.getCreatedBy() ) );
+        report.setId( reportDTO.getId() );
         if ( reportDTO.getUpdatedAt() != null ) {
             report.setUpdatedAt( DateTimeFormat.forPattern( "yyyy-MM-dd'T'HH:mm:ssZZ" ).parseDateTime( reportDTO.getUpdatedAt() ) );
         }
         report.setLongitude( reportDTO.getLongitude() );
-        report.setFinishedBy( userMapper.userDTOToUser( reportDTO.getFinishedBy() ) );
 
         return report;
     }

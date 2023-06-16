@@ -42,4 +42,5 @@ public interface ReportService {
 
     Optional<ReportDTO> update(Long id, ReportDTO reportDTO);
 
+    Long countResolved();
 }

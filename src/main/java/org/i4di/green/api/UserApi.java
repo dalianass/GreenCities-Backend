@@ -86,7 +86,6 @@ public class UserApi {
         return new ResponseEntity<>(userService.registerNewUser(userDTO), HttpStatus.CREATED) ;
     }
 
-
     @GetMapping({"/forAdmin"})
     @PreAuthorize("hasRole('Admin')")
     public String forAdmin(){

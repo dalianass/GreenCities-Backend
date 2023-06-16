@@ -17,6 +17,7 @@ public class ReportDTO extends TimestampedDTO {
     private Boolean deleted;
     private UserDTO createdBy;
     private UserDTO finishedBy;
+    private boolean isFinished;
     private Double latitude;
     private Double longitude;
     public String getDescription() {
@@ -65,6 +66,14 @@ public class ReportDTO extends TimestampedDTO {
 
     public void setFinishedBy(UserDTO finishedBy) {
         this.finishedBy = finishedBy;
+    }
+
+    public boolean getIsFinished() {
+        return isFinished;
+    }
+
+    public void setIsFinished(boolean finished) {
+        isFinished = finished;
     }
 
     public Boolean getDeleted() {

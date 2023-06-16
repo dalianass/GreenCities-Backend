@@ -3,6 +3,7 @@ package org.i4di.green.service.impl;
 import org.i4di.green.domain.Report;
 import org.i4di.green.dto.ReportDTO;
 import org.i4di.green.dto.mapper.ReportMapper;
+import org.i4di.green.dto.mapper.UserMapper;
 import org.i4di.green.repository.ReportRepository;
 import org.i4di.green.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +19,15 @@ public class ReportServiceImpl implements ReportService {
 
     private final ReportRepository reportRepository;
     private final ReportMapper reportMapper;
+
+    private final UserMapper userMapper;
     private final UserServiceImpl userServiceImpl;
 
     @Autowired
-    public ReportServiceImpl(ReportRepository reportRepository, ReportMapper reportMapper, UserServiceImpl userServiceImpl) {
+    public ReportServiceImpl(ReportRepository reportRepository, ReportMapper reportMapper, UserMapper userMapper, UserServiceImpl userServiceImpl) {
         this.reportRepository = reportRepository;
         this.reportMapper = reportMapper;
+        this.userMapper = userMapper;
         this.userServiceImpl = userServiceImpl;
     }
 
@@ -73,11 +77,19 @@ public class ReportServiceImpl implements ReportService {
         byId.get().setDescription(reportDTO.getDescription());
         byId.get().setTitle(reportDTO.getTitle());
         byId.get().setAddress(reportDTO.getAddress());
-        byId.get().setLatitude(reportDTO.getLatitude());
-        byId.get().setLongitude(reportDTO.getLongitude());
+//        byId.get().setLatitude(reportDTO.getLatitude());
+//        byId.get().setLongitude(reportDTO.getLongitude());
+        byId.get().setIsFinished(reportDTO.getIsFinished());
+//        byId.get().setFinishedBy(userMapper.userDTOToUser(reportDTO.getFinishedBy()));
 
         return Optional.of(reportMapper.reportToReportDTO(reportRepository.save(byId.get())));
 
+    }
+
+    @Override
+    public Long countResolved() {
+        Long result = reportRepository.countFinishedReportsCustom();
+        return result != null ? result : 0;
     }
 }
 

@@ -19,6 +19,8 @@ public interface ReportMapper extends UserFromId {
     @Mapping(source = "title", target = "title")
     @Mapping(source = "deleted", target = "deleted")
     @Mapping(source = "createdBy", target = "createdBy") //ovde potreban User, zato extend UserFromId ?
+    @Mapping(source = "finishedBy", target = "finishedBy")
+    @Mapping(source = "isFinished", target = "isFinished")
     @Mapping(source = "latitude", target = "latitude")
     @Mapping(source = "longitude", target = "longitude")
     ReportDTO reportToReportDTO(Report report);
@@ -34,6 +36,8 @@ public interface ReportMapper extends UserFromId {
     @Mapping(source = "title", target = "title")
     @Mapping(source = "deleted", target = "deleted")
     @Mapping(source = "createdBy", target = "createdBy")
+    @Mapping(source = "finishedBy", target = "finishedBy")
+    @Mapping(source = "isFinished", target = "isFinished")
     @Mapping(source = "latitude", target = "latitude")
     @Mapping(source = "longitude", target = "longitude")
     Report reportDTOToReport(ReportDTO reportDTO);

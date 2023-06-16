@@ -34,6 +34,9 @@ public class Report extends Timestamped {
     @JoinColumn(nullable = true, name = "finished_by_id", foreignKey = @ForeignKey(name = "FK_REPORT_FINISHED_BY"))
     private User finishedBy;
 
+    @Column(nullable = true, columnDefinition = "boolean default false")
+    private boolean isFinished;
+
     public String getDescription() {
         return description;
     }
@@ -98,6 +101,14 @@ public class Report extends Timestamped {
         this.finishedBy = finishedBy;
     }
 
+    public boolean getIsFinished() {
+        return isFinished;
+    }
+
+    public void setIsFinished(boolean finished) {
+        isFinished = finished;
+    }
+
     public Boolean getDeleted() {
         return deleted;
     }
@@ -105,4 +116,5 @@ public class Report extends Timestamped {
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
     }
+
 }
