@@ -42,11 +42,11 @@ dependencies {
 
 }
 
-jar {
-	manifest {
-		attributes 'Main-Class': 'org.i4di.green.GreenApplication'
-	}
-}
+//jar {
+//	manifest {
+//		attributes 'Main-Class': 'org.i4di.green.GreenApplication'
+//	}
+//}
 
 tasks.named('test') {
 	useJUnitPlatform()
