@@ -1,12 +1,15 @@
+
 plugins {
 	id 'org.springframework.boot' version '2.6.7'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
 }
 
-springBoot {
-	mainClass = 'org.i4di.green.GreenApplication'
-}
+apply plugin: 'java-library'
+
+//springBoot {
+//	mainClass = 'org.i4di.green.GreenApplication'
+//}
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
