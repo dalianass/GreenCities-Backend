@@ -37,6 +37,12 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
+    public List<ReportDTO> listReportsOfUser(Long id) {
+            return reportMapper.reportsToReportDTOs(reportRepository.listReportsFromCertainUser(id));
+    }
+
+
+    @Override
     public Optional<ReportDTO> show(Long id) {
         Optional<Report> byId = reportRepository.findById(id);
 

@@ -4,6 +4,9 @@ package org.i4di.green.util;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.i4di.green.domain.User;
+import org.i4di.green.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +17,10 @@ import java.util.function.Function;
 
 @Component
 public class JwtUtil {
-
+    private UserRepository userRepository;
+    public JwtUtil(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
     private static final String SECRET_KEY = "learn_programming_yourself";
 
     private static final int TOKEN_VALIDITY = 3600 * 5; // 5 sati traje
@@ -51,6 +57,10 @@ public class JwtUtil {
     public String generateToken(UserDetails userDetails) {
 
         Map<String, Object> claims = new HashMap<>();
+
+//        User user = userRepository.findByEmail("amina@gmail.com").get();
+
+        claims.put("role", userDetails.getAuthorities());
 
         return Jwts.builder()
                 .setClaims(claims)

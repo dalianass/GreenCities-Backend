@@ -39,10 +39,10 @@ public class UserApi {
                 -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping
-    public ResponseEntity<?> create(@Valid @RequestBody UserDTO userDTO) {
-        return new ResponseEntity<>(userService.create(userDTO), HttpStatus.CREATED);
-    }
+//    @PostMapping
+//    public ResponseEntity<?> create(@Valid @RequestBody UserDTO userDTO) {
+//        return new ResponseEntity<>(userService.create(userDTO), HttpStatus.CREATED);
+//    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
@@ -82,7 +82,7 @@ public class UserApi {
 
 
     @PostMapping({"/registerNewUser"})
-    public ResponseEntity<?>  registerNewUser(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<?>  registerNewUser(@RequestBody UserDTO userDTO) throws Exception {
         return new ResponseEntity<>(userService.registerNewUser(userDTO), HttpStatus.CREATED) ;
     }
 

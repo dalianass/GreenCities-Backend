@@ -26,7 +26,7 @@ public interface UserService {
     //dodala za jwt
 //    void initRoleAndUser();
 
-    Optional<UserDTO> registerNewUser(UserDTO userDTO);
+    Optional<UserDTO> registerNewUser(UserDTO userDTO) throws Exception;
 
     List<User> getUsers() throws Exception;
     //ne znam je l se ovako poziva interface

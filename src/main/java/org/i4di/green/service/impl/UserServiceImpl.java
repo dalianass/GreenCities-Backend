@@ -7,10 +7,15 @@ import org.i4di.green.repository.RoleRepository;
 import org.i4di.green.repository.UserRepository;
 import org.i4di.green.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.HttpStatusCodeException;
+import org.springframework.web.client.ResponseErrorHandler;
 
+import javax.swing.text.html.Option;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -137,16 +142,21 @@ public class UserServiceImpl implements UserService {
 //    }
 
     @Override
-    public Optional<UserDTO>  registerNewUser(UserDTO userDTO) {
-        User toCreate = userMapper.userDTOToUser(userDTO);
+    public Optional<UserDTO>  registerNewUser(UserDTO userDTO) throws Exception{
+        Optional<User> userAlreadyExists = userRepository.findByEmail(userDTO.getEmail());
+        if(!userAlreadyExists.isPresent()) {
+            User toCreate = userMapper.userDTOToUser(userDTO);
 
-        Role role = roleRepository.findById(2L).get(); //2 je id za korisnika
-        Set<Role> userRoles = new HashSet<>(); //set moze sadrzati samo unikate
-        userRoles.add(role);
-        toCreate.setRole(userRoles);
-        toCreate.setPassword(getEncodedPassword(userDTO.getPassword()));
-
-        return  Optional.of(userMapper.userToUserDTO(userRepository.save(toCreate)));
+            Role role = roleRepository.findById(2L).get(); //2 je id za korisnika
+            Set<Role> userRoles = new HashSet<>(); //set moze sadrzati samo unikate
+            userRoles.add(role);
+            toCreate.setRole(userRoles);
+            toCreate.setPassword(getEncodedPassword(userDTO.getPassword()));
+            return  Optional.of(userMapper.userToUserDTO(userRepository.save(toCreate)));
+        }
+        else {
+            throw new Exception("Vec postoji user sa tim emailom");
+        }
     }
 
 

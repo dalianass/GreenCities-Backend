@@ -25,6 +25,11 @@ public class ReportApi {
         return new ResponseEntity<>(reportService.list(), HttpStatus.OK);
     }
 
+    @GetMapping("/reports-of-user/{id}")
+    public ResponseEntity<?> listReportsFromUser(@PathVariable(value="id")Long id) {
+        return new ResponseEntity<>(reportService.listReportsOfUser(id), HttpStatus.OK);
+    }
+
     @GetMapping("/broj-resenih")
     public Long vratiBrojUklonjenihDeponija() {
         return reportService.countResolved();

@@ -2,6 +2,7 @@ package org.i4di.green.repository;
 
 import org.i4di.green.domain.Report;
 import org.i4di.green.domain.User;
+import org.i4di.green.dto.ReportDTO;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -24,6 +25,9 @@ public interface ReportRepository extends CrudRepository<Report, Long> {
 
     @Query("SELECT COUNT(u) FROM Report u WHERE u.isFinished = true")
     Long countFinishedReportsCustom();
+
+    @Query("SELECT u FROM Report u WHERE u.createdBy.id = :id")
+    List<Report> listReportsFromCertainUser(Long id);
 
     Optional<Report> findById(Long id);
 

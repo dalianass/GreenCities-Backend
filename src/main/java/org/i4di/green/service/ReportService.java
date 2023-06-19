@@ -16,6 +16,7 @@ public interface ReportService {
      */
     List<ReportDTO> list();
 
+    List<ReportDTO> listReportsOfUser(Long id);
     /**
      * Returns the report with the given {@code id}.
      *
@@ -43,4 +44,5 @@ public interface ReportService {
     Optional<ReportDTO> update(Long id, ReportDTO reportDTO);
 
     Long countResolved();
+
 }
