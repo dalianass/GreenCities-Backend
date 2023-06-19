@@ -31,7 +31,6 @@ public class JwtService implements UserDetailsService {
 
     @Autowired
     private AuthenticationManager authenticationManager;
-
     @Autowired
     UserMapper userMapper;
 

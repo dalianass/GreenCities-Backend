@@ -19,10 +19,6 @@ public class RoleApi {
 
     private RoleService roleService;
 
-//    @PostMapping({"/createNewRole"})
-//    public Role createNewRole(@RequestBody Role role) {
-//        return roleService.createNewRole(role);
-//    }
     @Autowired
     public RoleApi(RoleService roleService) {
         this.roleService = roleService;
@@ -33,6 +29,4 @@ public class RoleApi {
     public ResponseEntity<?> createNewRole(@RequestBody RoleDTO roleDTO) {
         return new ResponseEntity<>(roleService.createNewRole(roleDTO), HttpStatus.CREATED) ;
     }
-    // request body oznacava da treba u
-    // body-ju requesta da se posalje nesto tipa Role
 }

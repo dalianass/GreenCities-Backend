@@ -26,10 +26,6 @@ public interface UserMapper  { //da li ovde treba extends RoleFromId?
     //koristi informacije iz @Mapping da kreira UserDto
 
     List<UserDTO> usersToUserDTOs(List<User> users);
-//    UserToUserDTO and usersToUserDTOs
-//    don't have any implementation, they just have the signature. Spring
-//    Framework provides the implementation for these methods using the information
-//    provided by the @Mapping annotations.
 
     @Mapping(source = "id", target = "id")
     @Mapping(source = "createdAt", target = "createdAt", dateFormat = Report.ISO_8601_TIMESTAMP_FORMAT)

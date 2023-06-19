@@ -19,7 +19,6 @@ public class ReportServiceImpl implements ReportService {
 
     private final ReportRepository reportRepository;
     private final ReportMapper reportMapper;
-
     private final UserMapper userMapper;
     private final UserServiceImpl userServiceImpl;
 
@@ -86,7 +85,6 @@ public class ReportServiceImpl implements ReportService {
 //        byId.get().setLatitude(reportDTO.getLatitude());
 //        byId.get().setLongitude(reportDTO.getLongitude());
         byId.get().setIsFinished(reportDTO.getIsFinished());
-//        byId.get().setFinishedBy(userMapper.userDTOToUser(reportDTO.getFinishedBy()));
 
         return Optional.of(reportMapper.reportToReportDTO(reportRepository.save(byId.get())));
 

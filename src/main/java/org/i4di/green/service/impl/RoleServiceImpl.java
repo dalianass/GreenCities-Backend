@@ -18,14 +18,8 @@ public class RoleServiceImpl implements RoleService {
 
     @Autowired
     private RoleRepository roleRepository;
-
     @Autowired
     private RoleMapper roleMapper;
-
-//    @Override
-//    public Role createNewRole(Role role) {
-//        return roleRepository.save(role);
-//    }
 
     @Override
     public Optional<RoleDTO> createNewRole(RoleDTO roleDTO) {

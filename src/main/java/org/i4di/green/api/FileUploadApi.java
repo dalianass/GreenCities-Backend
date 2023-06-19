@@ -24,12 +24,4 @@ public class FileUploadApi {
         String imageURL = fileUpload.uploadFile(multipartFile);
         return imageURL;
     }
-
-/*    @PostMapping("/upload")
-    public String uploadFile(@RequestParam("image")MultipartFile multipartFile,
-                             Model model) throws IOException {
-        String imageURL = fileUpload.uploadFile(multipartFile);
-        model.addAttribute("imageURL",imageURL);
-        return "gallery";
-    }*/
 }

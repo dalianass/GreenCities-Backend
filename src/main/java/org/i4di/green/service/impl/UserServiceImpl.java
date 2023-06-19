@@ -16,10 +16,7 @@ import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.ResponseErrorHandler;
 
 import javax.swing.text.html.Option;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 @Transactional
@@ -27,8 +24,6 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final RoleRepository roleRepository;
-
-//    @Autowired
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -96,53 +91,8 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    //*************************************DODATO ZBOG JWT
-//    @Override
-//    public void initRoleAndUser() {
-//
-//        //kao SEED baze sa ulogama
-//        Role adminRole = new Role();
-//        adminRole.setRoleName("Admin");
-//        adminRole.setRoleDescription("Admin uloga");
-//        roleRepository.save(adminRole);
-//
-//        Role userRole = new Role();
-//        userRole.setRoleName("User");
-//        userRole.setRoleDescription("Podrazumevana uloga za nove korisnike");
-//        roleRepository.save(userRole);
-//
-//        Role radnikRole = new Role();
-//        radnikRole.setRoleName("Radnik");
-//        radnikRole.setRoleDescription("Uloga za radnike u komunalnim preduzecima");
-//        roleRepository.save(radnikRole);
-//
-//        User adminUser = new User();
-//        adminUser.setFirstName("Admin");
-//        adminUser.setEmail("admin@gmail.com");
-//        adminUser.setPassword(getEncodedPassword("admin@pass"));
-//        adminUser.setLastName("Admin");
-//        adminUser.setDeleted(false);
-//
-//        Set<Role> adminRoles = new HashSet<>();
-//        adminRoles.add(adminRole);
-//        adminUser.setRole(adminRoles);
-//        userRepository.save(adminUser);
-//
-//    }
-
-//    @Override
-//    public User registerNewUser(User user) {
-//        Role role = roleRepository.findById(14L).get(); //dobije role i description
-//        Set<Role> userRoles = new HashSet<>(); //set moze sadrzati samo unikate
-//        userRoles.add(role);
-//        user.setRole(userRoles);
-//        user.setPassword(getEncodedPassword(user.getPassword()));
-//
-//        return userRepository.save(user);
-//    }
-
     @Override
-    public Optional<UserDTO>  registerNewUser(UserDTO userDTO) throws Exception{
+    public Optional<UserDTO>  registerNewUser(UserDTO userDTO){
         Optional<User> userAlreadyExists = userRepository.findByEmail(userDTO.getEmail());
         if(!userAlreadyExists.isPresent()) {
             User toCreate = userMapper.userDTOToUser(userDTO);
@@ -155,12 +105,9 @@ public class UserServiceImpl implements UserService {
             return  Optional.of(userMapper.userToUserDTO(userRepository.save(toCreate)));
         }
         else {
-            throw new Exception("Vec postoji user sa tim emailom");
+            return Optional.empty();
         }
     }
-
-
-    //me
     @Override
     public List<User> getUsers() throws Exception{
         if(userRepository.count() > 0) {
@@ -175,5 +122,4 @@ public class UserServiceImpl implements UserService {
     public String getEncodedPassword(String password) {
         return passwordEncoder.encode(password);
     }
-    //encode je inbuilt. postoji i matches i slicno
 }

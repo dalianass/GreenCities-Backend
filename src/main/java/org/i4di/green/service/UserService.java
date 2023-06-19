@@ -13,8 +13,6 @@ public interface UserService {
 
     Optional<UserDTO> showByEmail(String email);
 
-//    List<UserDTO> showByRole(String role);
-
 //    List<UserDTO> search(String firstName, String lastName);
 
     Optional<UserDTO> create(UserDTO userDTO);
@@ -23,13 +21,9 @@ public interface UserService {
 
     Optional<UserDTO> update(Long id, UserDTO userDTO);
 
-    //dodala za jwt
-//    void initRoleAndUser();
-
-    Optional<UserDTO> registerNewUser(UserDTO userDTO) throws Exception;
+    Optional<UserDTO> registerNewUser(UserDTO userDTO);
 
     List<User> getUsers() throws Exception;
-    //ne znam je l se ovako poziva interface
 
     String getEncodedPassword(String password);
 }

@@ -58,13 +58,11 @@ public class JwtUtil {
 
         Map<String, Object> claims = new HashMap<>();
 
-//        User user = userRepository.findByEmail("amina@gmail.com").get();
-
         claims.put("role", userDetails.getAuthorities());
 
         return Jwts.builder()
                 .setClaims(claims)
-                .setSubject(userDetails.getUsername()) //valjda ce vratiti email????
+                .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + TOKEN_VALIDITY * 1000))
                 .signWith(SignatureAlgorithm.HS512, SECRET_KEY)

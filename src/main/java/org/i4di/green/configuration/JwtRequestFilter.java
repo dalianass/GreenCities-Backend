@@ -51,9 +51,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
             UserDetails userDetails = jwtService.loadUserByUsername(email);
-            //samo se metoda zove byUsername, zapravo se radi sa emailom
+            //radi sa emailom
 
-            //ako je token iz headera isti kao token koji je dobijen kad se trazi po username-u usera (?)
             if (jwtUtil.validateToken(jwtToken, userDetails)) {
 
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =

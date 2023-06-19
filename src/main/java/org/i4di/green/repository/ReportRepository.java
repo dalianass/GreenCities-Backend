@@ -18,7 +18,6 @@ public interface ReportRepository extends CrudRepository<Report, Long> {
 
     List<Report> findAllByFinishedById(Long userId);
 
-//    Long countByTitle(String title);
 
 //    @Query("SELECT COUNT(u) FROM Report u WHERE u.createdAt <> u.updatedAt")
 //    Long countByDifferentCreatedAtAndUpdatedAt();

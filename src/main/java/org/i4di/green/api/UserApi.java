@@ -1,6 +1,7 @@
 package org.i4di.green.api;
 
 import org.i4di.green.domain.User;
+import org.i4di.green.dto.RoleDTO;
 import org.i4di.green.dto.UserDTO;
 import org.i4di.green.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +16,8 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-//@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/users")
 public class UserApi {
-
     private final UserService userService;
 
     @Autowired
@@ -39,11 +38,6 @@ public class UserApi {
                 -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-//    @PostMapping
-//    public ResponseEntity<?> create(@Valid @RequestBody UserDTO userDTO) {
-//        return new ResponseEntity<>(userService.create(userDTO), HttpStatus.CREATED);
-//    }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
         boolean result = userService.delete(id);
@@ -61,28 +55,13 @@ public class UserApi {
 
     }
 
-
-//    *****************SA JWT TUTORIJALA
-
-    //radice ovo nakon svakog build-a aplikacije, tj. dodace usere i uloge
-//    @PostConstruct
-//    public void initRoleAndUser() {
-//        userService.initRoleAndUser();
-//    }
-
     @GetMapping({"/get-users"})
     public List<User> getUsers() throws Exception {
         return userService.getUsers();
     }
 
-//    @PostMapping({"/registerNewUser"})
-//    public User registerNewUser(@RequestBody User user) {
-//        return userService.registerNewUser(user);
-//    }
-
-
     @PostMapping({"/registerNewUser"})
-    public ResponseEntity<?>  registerNewUser(@RequestBody UserDTO userDTO) throws Exception {
+    public ResponseEntity<?>  registerNewUser(@RequestBody UserDTO userDTO) {
         return new ResponseEntity<>(userService.registerNewUser(userDTO), HttpStatus.CREATED) ;
     }
 

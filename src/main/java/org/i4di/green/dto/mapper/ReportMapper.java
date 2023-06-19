@@ -18,7 +18,7 @@ public interface ReportMapper extends UserFromId {
     @Mapping(source = "description", target = "description")
     @Mapping(source = "title", target = "title")
     @Mapping(source = "deleted", target = "deleted")
-    @Mapping(source = "createdBy", target = "createdBy") //ovde potreban User, zato extend UserFromId ?
+    @Mapping(source = "createdBy", target = "createdBy") //ovde potreban User, zato extend UserFromId
     @Mapping(source = "finishedBy", target = "finishedBy")
     @Mapping(source = "isFinished", target = "isFinished")
     @Mapping(source = "latitude", target = "latitude")
@@ -43,6 +43,4 @@ public interface ReportMapper extends UserFromId {
     Report reportDTOToReport(ReportDTO reportDTO);
 
     List<Report> reportDTOsToReports(List<ReportDTO> reportDTOs);
-
-
 }

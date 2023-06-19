@@ -6,6 +6,5 @@ import org.i4di.green.dto.RoleDTO;
 import java.util.Optional;
 
 public interface RoleService {
-//    Role createNewRole(Role role);
     Optional<RoleDTO> createNewRole(RoleDTO roleDTO);
 }
